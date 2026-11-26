@@ -1,0 +1,30 @@
+# Quantum Parallel Marked Set
+
+The project studies exact identification of a marked set from one simultaneous
+layer of ordinary phase-oracle calls. The number of marks is supplied.
+
+Scientific routes
+
+- README.md: question, principal results and navigation.
+- science/model.md: authoritative oracle model, resources and statement scope.
+- science/moment-design.md: parity symmetrization, exact rational feasibility,
+  two-layer one-mark construction and finite examples.
+- science/asymptotics.md: fixed-mark Laguerre law, lower bound polynomial,
+  positive bracketing and finite endpoint for the even-moment construction.
+- science/receiver.md: signed incidence multipliers, explicit Schur-transform
+  decoder, address routing and known-gate resource bounds.
+- references/RELATED_WORK.md and references/references.bib: provenance.
+- verification/README.md: commands and scope of executable checks.
+
+Learning routes
+
+- learning/CHILDS_BRIDGE.md: Andrew M. Childs's 17 April 2025 Lecture Notes
+  on Quantum Algorithms, selected sections and worked translations.
+- learning/MILESTONES.md: 30 shared milestones, with 12 background and
+  18 project-specific milestones.
+
+Read the model before comparing with a bit oracle, controlled phase access,
+multi-round enumeration or a circuit-depth benchmark. The finite program
+covers every supplied admissible cardinality. The Laguerre expansion takes
+the large-address limit at a fixed number of marks. For balanced weight,
+complementary sets implement the same phase channel.

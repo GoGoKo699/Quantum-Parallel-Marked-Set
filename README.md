@@ -7,7 +7,7 @@ The oracle flips the phase of each marked address. All calls act at once on sepa
 | Case | Exact one-round result |
 |---|---|
 | One mark, $`N\ge4`$ addresses | $`\left\lceil(N-\sqrt{N})/2\right\rceil`$ calls |
-| Supplied $`r`$ marks with $`1\le r<N/2`$ | A finite rational moment program gives the minimum |
+| Supplied $`r`$ marks with $`1\le r \lt N/2`$ | A finite rational moment program gives the minimum |
 | Four marks among 30 addresses | 14 calls |
 | Exactly half the addresses marked | A set and its complement give the same phase channel |
 
