@@ -53,7 +53,7 @@ In the Schur basis, on the source spin defect $`j`$, the map $`M`$ replaces the 
 |v_j\rangle=\sum_k\sqrt{w_k}\,f_j(k,r)|k-N/2\rangle
 ```
 
-and leaves the multiplicity vector unchanged. The moment conditions give $`M^\dagger M=I`$ on the weight-$`r`$ label space, so every $`|v_j\rangle`$ in that space has norm one. Different source labels can occupy the same spin sector and are distinguished by the multiplicity register. The decoder therefore applies the Schur transform, applies a known unitary controlled by $`j`$ that sends $`|v_j\rangle`$ to $`|r-N/2\rangle`$ with the displayed signs, and applies the inverse Schur transform. This gives exactly $`|A\rangle`$. Measuring the incidence register yields all marked addresses.
+and leaves the multiplicity vector unchanged. The moment conditions give $`M^\dagger M=I`$ on the weight-$`r`$ label space, so every $`|v_j\rangle`$ in that space has norm one. The multiplicity register carries the source amplitudes within each spin sector, and the decoder preserves them coherently. The decoder therefore applies the Schur transform, applies a known unitary controlled by $`j`$ that sends $`|v_j\rangle`$ to $`|r-N/2\rangle`$ with the displayed signs, and applies the inverse Schur transform. This gives exactly $`|A\rangle`$. Measuring the incidence register yields all marked addresses.
 
 ## Circuit resources and precision
 
