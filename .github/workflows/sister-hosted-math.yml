@@ -1,0 +1,78 @@
+name: Sister hosted mathematics
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/sister-hosted-math.yml
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - repo: Quantum-Parallel-Marked-Set
+            revision: dacb3d821ff5f6152d5eb4bd8367166369b38767
+            proof: science/flagged-erasure.md
+          - repo: Quantum-Phase-Gate-Erasure
+            revision: 5e51a3f555151e505923679ef146ed55aa88003d
+            proof: science/flagged-search.md
+    steps:
+      - name: Check out validation helpers
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Check out the exact scientific revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: GoGoKo699/${{ matrix.repo }}
+          ref: ${{ matrix.revision }}
+          path: checked-source
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install browser and mathematics runtime
+        run: |
+          npm install --prefix "$RUNNER_TEMP/math-runtime" playwright@1.56.1 mathjax-full@3.2.1
+          node "$RUNNER_TEMP/math-runtime/node_modules/playwright/cli.js" install chromium
+      - name: Check pinned GitHub pages at both widths
+        env:
+          TARGET_REPOSITORY: GoGoKo699/${{ matrix.repo }}
+          TARGET_REVISION: ${{ matrix.revision }}
+          TARGET_PROOF: ${{ matrix.proof }}
+        shell: bash
+        run: |
+          export NODE_PATH="$RUNNER_TEMP/math-runtime/node_modules"
+          probe=(node verification/hosted_math/probe_hosted_math.cjs --root checked-source --repository "$TARGET_REPOSITORY" --revision "$TARGET_REVISION")
+          "${probe[@]}" --page README.md --output "$RUNNER_TEMP/probe-readme" || true
+          "${probe[@]}" --page "$TARGET_PROOF" --output "$RUNNER_TEMP/probe-proof" || true
+          capture=(node verification/hosted_math/capture_hosted_math.cjs --root checked-source --repository "$TARGET_REPOSITORY" --revision "$TARGET_REVISION")
+          "${capture[@]}" --output "$RUNNER_TEMP/hosted-first" || {
+            status=$?
+            if test -f "$RUNNER_TEMP/hosted-first/hosted-report.json" && grep -Eq 'HTTP (502|503|504)' "$RUNNER_TEMP/hosted-first/hosted-report.json"; then
+              "${capture[@]}" --output "$RUNNER_TEMP/hosted-resume" --resume-from "$RUNNER_TEMP/hosted-first"
+            else
+              exit "$status"
+            fi
+          }
+      - name: Keep comparison reports and captures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sister-hosted-${{ matrix.repo }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/hosted-first
+            ${{ runner.temp }}/hosted-resume
+            ${{ runner.temp }}/probe-readme
+            ${{ runner.temp }}/probe-proof
+          if-no-files-found: warn
+          retention-days: 14
