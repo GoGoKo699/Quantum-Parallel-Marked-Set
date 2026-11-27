@@ -24,7 +24,7 @@ At $`N=5`$ the coefficient matrix on the ten edges is $`J-2A`$, where $`A`$ is t
 ```math
 G_0=H/6,\qquad G_e=H/12\quad\text{for every }e.
 ```
-Each $`G_e`$ is a Gram matrix of vectors in an ordered-pair space of dimension $`2d`$. Consequently $`\operatorname{rank}H\le2d`$ for each possible lost port.
+Each $`G_e`$ is a Gram matrix of vectors in an ordered-pair space of dimension $`2d`$. Consequently $`\mathrm{rank}H\le2d`$ for each possible lost port.
 
 ### The forced tuple weights
 
@@ -37,11 +37,11 @@ Sum over $`x`$ and use normalization and positivity. All $`z(x)`$ vanish. The la
 
 ### Why a protected quantum register is necessary
 
-For any fixed lost port, restrict the survivor columns to equal pairs. Let $`M`$ have row index $`a`$ and columns $`(b,u)`$, with entries the $`u`$-th tag component of $`v_{a,b,b}`$ in that port order. Its rank $`R`$ is at most $`\operatorname{rank}H_i`$. With $`M_b`$ the $`b`$ block and $`P(a,b)=\|v_{a,b,b}\|^2`$, one has
+For any fixed lost port, restrict the survivor columns to equal pairs. Let $`M`$ have row index $`a`$ and columns $`(b,u)`$, with entries the $`u`$-th tag component of $`v_{a,b,b}`$ in that port order. Its rank $`R`$ is at most $`\mathrm{rank}H_i`$. With $`M_b`$ the $`b`$ block and $`P(a,b)=\|v_{a,b,b}\|^2`$, one has
 ```math
 P(a,b)=(M_bM_b^\dagger)_{aa},\qquad P=(J-I)/120.
 ```
-All the matrices $`M_bM_b^\dagger`$ are supported on the same $`R`$-dimensional column space. The real space of Hermitian matrices on that support has dimension $`R^2`$, so $`\operatorname{rank}P\le R^2`$. But $`P`$ has rank five, forcing $`\operatorname{rank}H_i\ge3`$. Together the bounds give $`d\ge2`$. A register dephased in a fixed basis before the receiver uses it is equivalent to a mixture of no-memory branches with an available classical label, and each branch would have to work. This also rules out such a classical record. If even one reduced query state is diagonal, its rank is five, and the upper rank bound instead gives $`d\ge3`$.
+All the matrices $`M_bM_b^\dagger`$ are supported on the same $`R`$-dimensional column space. The real space of Hermitian matrices on that support has dimension $`R^2`$, so $`\mathrm{rank}P\le R^2`$. But $`P`$ has rank five, forcing $`\mathrm{rank}H_i\ge3`$. Together the bounds give $`d\ge2`$. A register dephased in a fixed basis before the receiver uses it is equivalent to a mixture of no-memory branches with an available classical label, and each branch would have to work. This also rules out such a classical record. If even one reduced query state is diagonal, its rank is five, and the upper rank bound instead gives $`d\ge3`$.
 
 ## A qutrit construction
 
@@ -51,12 +51,12 @@ Label the addresses $`0,1,2,3,4`$ and use a tag with basis $`A,B,C`$. Put zero a
 - For an all-distinct ordered tuple $`t`$, use the following tag.
 
 ```math
-\operatorname{sgn}(t)\left(\frac{|A\rangle}{\sqrt3}
+\mathrm{sgn}(t)\left(\frac{|A\rangle}{\sqrt3}
     +\sqrt{\frac23}\,\omega^{f(t)}|C\rangle\right),\qquad
 \omega=e^{2\pi i/3}.
 ```
 
-The sign is its permutation parity relative to increasing address order. Set $`f(t)`$ to the zero-based position of the largest address plus $`\operatorname{sgn}(t)g(\operatorname{sort}t)`$, modulo three. The table below defines $`g`$.
+The sign is its permutation parity relative to increasing address order. Set $`f(t)`$ to the zero-based position of the largest address plus $`\mathrm{sgn}(t)g(\mathrm{sort}t)`$, modulo three. The table below defines $`g`$.
 
 | $`g`$ | Increasing address triples |
 | --- | --- |
@@ -74,7 +74,7 @@ For port flag $`i`$, the projector for mark $`m`$ is $`5\sum_a |\psi_{m,a}^{(i)}
 
 Let $`|\Psi_m\rangle=O_m^{\otimes3}|\Psi\rangle`$ be the full queried state for mark $`m`$. Exact classical identification asks for the label $`m`$ for each of these states. Coherent recovery asks for a decoder taking every superposition $`\sum_m c_m|\Psi_m\rangle`$ to the logical state $`\sum_m c_m|m\rangle`$ after loss. The decoder must preserve relative phases and entanglement with a reference.
 
-Exact erasure correction on this span requires that the erased port alone have an input-independent reduced state. This is the complementary-channel form of the [Knill–Laflamme condition](https://doi.org/10.1103/PhysRevA.55.900). If $`\rho_i`$ is the pre-query marginal on the lost port, the marginal for each queried state is $`O_m\rho_i O_m`$. These matrices must coincide for every mark. For two distinct coordinates $`a,b`$, mark $`a`$ negates the $`(a,b)`$ matrix element and any mark outside $`\{a,b\}`$ leaves it fixed. Thus $`\rho_i`$ is diagonal. Its five diagonal entries are each $`1/5`$ by the Gram identities and forced tuple weights, so $`5=\operatorname{rank}\rho_i\le2d`$ and $`d\ge3`$.
+Exact erasure correction on this span requires that the erased port alone have an input-independent reduced state. This is the complementary-channel form of the [Knill–Laflamme condition](https://doi.org/10.1103/PhysRevA.55.900). If $`\rho_i`$ is the pre-query marginal on the lost port, the marginal for each queried state is $`O_m\rho_i O_m`$. These matrices must coincide for every mark. For two distinct coordinates $`a,b`$, mark $`a`$ negates the $`(a,b)`$ matrix element and any mark outside $`\{a,b\}`$ leaves it fixed. Thus $`\rho_i`$ is diagonal. Its five diagonal entries are each $`1/5`$ by the Gram identities and forced tuple weights, so $`5=\mathrm{rank}\rho_i\le2d`$ and $`d\ge3`$.
 
 For the qutrit construction, define $`|\phi_{m,a}^{(i)}\rangle=\sqrt{5}(-1)^{[a=m]}|\psi_{m,a}^{(i)}\rangle`$. At each fixed lost position these 25 vectors are orthonormal. A receiver isometry on their span sends them to $`|m\rangle|a\rangle`$. Extend it to a known unitary using spare output space. After applying the receiver isometry on its two surviving addresses and tag, the joint state becomes $`|m\rangle`$ tensored with the same entangled state of erased port and receiver's second output for every $`m`$. Linearity yields coherent decoding. This proves $`d=3`$ is attained for coherent recovery.
 
