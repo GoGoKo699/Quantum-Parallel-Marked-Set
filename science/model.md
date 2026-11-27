@@ -29,6 +29,16 @@ L_{\lceil r/2\rceil}^{(-1/2)}(a_r/2)=0,
 4. **Explicit readout.** The [Schur decoder](receiver.md) implements the measurement for every exact probe from the program, with polynomially many known gates and ideal rotations. The necessary query registers use $`t\lceil\log_2N\rceil`$ qubits. Gates outside the single oracle layer are accounted for separately.
 5. **Other cardinalities.** The empty and full sets are known from their cardinality alone. At $`N=2r \gt 0`$, disjoint complementary inputs yield $`O_{A^{\mathrm c}}=-O_A`$ and therefore the same channel. For $`N/2 \lt r \lt N`$, recover the complementary set of size $`N-r`$ and complement the output.
 
+## Flagged query-port erasure
+
+The [erasure extension](flagged-erasure.md) keeps the same bare oracle and
+removes an arbitrary queried port immediately after the simultaneous layer.
+The receiver learns which port was lost and can access an explicitly charged
+protected register. For five addresses and one mark, three calls are necessary
+and sufficient, a protected qutrit suffices, and a protected qubit for classical
+identification is open. Coherent recovery of the queried mark states requires
+exactly a qutrit. The results above assume all queried ports reach the receiver.
+
 ## Comparisons within the model
 
 For **product probes across query ports**, a necessary condition for recovery is to distinguish every pair $`C\cup\{i\},C\cup\{j\}`$, where $`i\ne j`$ and $`C`$ avoids both addresses. The pair induces exactly the single-mark relative diagonal unitary, regardless of $`C`$. The pair conditions used in [Wu and Duan's product-state lower bound](../references/RELATED_WORK.md#exact-parallel-search) therefore apply, giving an asymptotic lower bound of $`2N/3+o(N)`$ for product probes. One can also convert any product probe with local ancillas into a product of address-only pure probes with the same overlap factors, by keeping the address marginal probabilities as squared amplitudes. The full-set task inherits this lower bound. For fixed $`r`$ the entangled procedure uses asymptotically at most three quarters of the calls required by any such probe.

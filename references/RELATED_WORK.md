@@ -19,3 +19,20 @@
 [Dave Bacon, Isaac Chuang and Aram Harrow](https://arxiv.org/abs/quant-ph/0407082) supply the efficient quantum Schur transform used for known gates. The [receiver](../science/receiver.md) calculates the signed action of each subset layer and uses it to select the magnetic rotation. Gaussian quadrature and generalized Laguerre polynomials use the standard conventions in the [NIST Digital Library of Mathematical Functions](https://dlmf.nist.gov/3.5).
 
 [Joran van Apeldoorn, Sander Gribling and Harold Nieuwboer, *Basic quantum subroutines: finding multiple marked elements and summing numbers*](https://doi.org/10.22331/q-2024-03-14-1284), Quantum 8, 1284 (2024), give nearly gate-optimal recovery of all marked addresses when the oracle can be queried through many rounds. Their query scaling is proportional to the square root of the product of the address count and mark count. The result here minimizes total calls within the one-round restriction.
+
+## Flagged loss and exact recovery
+
+[Quantum Phase Gate Erasure](https://github.com/GoGoKo699/Quantum-Phase-Gate-Erasure/blob/main/science/flagged-search.md)
+provides the comparison to delayed continuous-phase gate retrieval with flagged
+probe erasures and no protected stored quantum register. Its proof expands a
+loss into hidden computational-basis branches. The [flagged-search proof](../science/flagged-erasure.md)
+uses this expansion to compare supports of distinct marked-address outputs, and
+accounts for protected memory.
+
+[Oded Regev and Liron Schiff, *Impossibility of a quantum speed-up with a faulty oracle*](https://arxiv.org/abs/1202.1027)
+study search with random failures of the oracle call. Here the loss occurs on a
+queried address register immediately after the parallel layer, and its position
+is supplied. The coherent recovery criterion uses [Emanuel Knill and Raymond
+Laflamme](https://doi.org/10.1103/PhysRevA.55.900) on the span of the oracle
+outputs. The [Watrous bridge](../learning/WATROUS_BRIDGE.md) gives the reduction
+and support-discrimination prerequisites.
