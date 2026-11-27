@@ -1,6 +1,6 @@
 # 30 milestones for one-round marked-set recovery
 
-The first **12 milestones** build the access model, exact discrimination criterion, and symmetry tools. The next **18 milestones** connect the finite probe design to its asymptotic behavior and coherent decoder. The [Childs bridge](CHILDS_BRIDGE.md) gives the targeted reading from Andrew M. Childs's *Lecture Notes on Quantum Algorithms*, 17 April 2025.
+The first **12 milestones** build the access model, exact discrimination criterion, and symmetry tools. The next **18 milestones** develop the lossless probe and decoder, then follow what changes after flagged loss. The [Watrous bridge](WATROUS_BRIDGE.md) maps the reading from John Watrous’s *The Theory of Quantum Information* (Cambridge University Press, 2018).
 
 ## Route through the project
 
@@ -10,7 +10,8 @@ The first **12 milestones** build the access model, exact discrimination criteri
 | [M06](#m06-address-tuples-and-parity)–[M12](#m12-the-complete-one-round-problem) | Parity, symmetry, and the complete operational question |
 | [M13](#m13-reducing-a-general-probe)–[M18](#m18-finite-optimality-with-several-marks) | An exact finite characterization and its feasible probes |
 | [M19](#m19-the-lower-edge-of-the-grid)–[M23](#m23-the-fixed-r-query-law) | Lower bound, parity grid, and the fixed-weight law |
-| [M24](#m24-equivariance-of-a-layer-map)–[M30](#m30-the-scientific-result-in-its-access-model) | Coherent recovery, cost, and interpretation |
+| [M24](#m24-equivariance-of-a-layer-map)–[M26](#m26-lossless-readout-and-resources) | Schur sectors, exact decoding, and circuit cost |
+| [M27](#m27-tracing-out-a-queried-port)–[M30](#m30-what-recovery-requires) | Lost branches, protected memory, and coherence |
 
 ## Phase I — Background and preliminaries
 
@@ -24,7 +25,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The fixed-weight promise specifies a family of candidate oracles. It also lets the decoder use the known output weight.
 
-**Canonical sources.** [Model and results](../science/model.md) · [The oracle and output](CHILDS_BRIDGE.md#the-oracle-access-and-output)
+**Canonical sources.** [Model and results](../science/model.md) · [Watrous §§2.1–2.3, 3.1](WATROUS_BRIDGE.md#bare-queries-and-exact-discrimination)
 
 ### M02 A bare phase query
 
@@ -34,9 +35,9 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Prerequisites.** [M01](#m01-the-unknown-marked-set).
 
-**Conceptual connection.** Childs's response qubit can implement phase kickback. The supplied oracle here directly applies the address sign.
+**Conceptual connection.** Unitary conjugation represents the bare oracle as a channel. An address phase affects interference between different addresses.
 
-**Canonical sources.** [Model and results](../science/model.md) · [The oracle and output](CHILDS_BRIDGE.md#the-oracle-access-and-output)
+**Canonical sources.** [Model and results](../science/model.md) · [Watrous §§2.1–2.3, 3.1](WATROUS_BRIDGE.md#bare-queries-and-exact-discrimination)
 
 ### M03 Global phase and complements
 
@@ -48,7 +49,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The project has exactly N valid addresses. A known phase reference would change the accessible operations and the complement argument.
 
-**Canonical sources.** [Model and results](../science/model.md) · [The oracle and output](CHILDS_BRIDGE.md#the-oracle-access-and-output)
+**Canonical sources.** [Model and results](../science/model.md) · [Watrous §§2.1–2.3, 3.1](WATROUS_BRIDGE.md#bare-queries-and-exact-discrimination)
 
 ### M04 One layer and many calls
 
@@ -60,7 +61,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** Sequential Grover search uses known reflections between queries. Its query scale answers a different scheduling and output question.
 
-**Canonical sources.** [Model and results](../science/model.md) · [The oracle and output](CHILDS_BRIDGE.md#the-oracle-access-and-output)
+**Canonical sources.** [Model and results](../science/model.md) · [Watrous §§2.1–2.3, 3.1](WATROUS_BRIDGE.md#bare-queries-and-exact-discrimination)
 
 ### M05 Exact discrimination
 
@@ -72,7 +73,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The oracle analysis can target pairwise overlaps. A realization still needs a known receiver.
 
-**Canonical sources.** [Model and results](../science/model.md) · [Schur receiver and resources](../science/receiver.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Model and results](../science/model.md) · [Schur receiver and resources](../science/receiver.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M06 Address tuples and parity
 
@@ -84,7 +85,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** Repeated queries contribute in pairs to the sign, while both uses still consume oracle ports.
 
-**Canonical sources.** [Model and results](../science/model.md) · [Finite moment design](../science/moment-design.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Model and results](../science/model.md) · [Finite moment design](../science/moment-design.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M07 Differences between candidates
 
@@ -96,7 +97,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** All common marks contribute two signs and cancel. The possible difference sizes determine how many constraints the design must enforce.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M08 Averaging address permutations
 
@@ -106,9 +107,9 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Prerequisites.** [M05](#m05-exact-discrimination), [M07](#m07-differences-between-candidates).
 
-**Conceptual connection.** Transitivity on subsets of each size produces one unknown weight per accessible size. This is a different use of symmetrization from averaging a decision polynomial in Childs §21.4.
+**Conceptual connection.** Transitivity on subsets of each size produces one unknown weight per accessible size. The relabeling acts on query addresses and promised outputs together.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M09 Signed intersection counts
 
@@ -120,7 +121,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** A signed counting problem converts orthogonality into linear equations with known coefficients.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M10 Moments and positive weights
 
@@ -132,7 +133,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The project can match the binomial target on fewer nodes than that target distribution uses. The agreement controls only the specified polynomial tests.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Fixed-weight asymptotics](../science/asymptotics.md) · [From moments to the query law](CHILDS_BRIDGE.md#how-the-moment-problem-gives-a-query-law)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Fixed-weight asymptotics](../science/asymptotics.md) · [Parity and averaging](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M11 Spin and permutation labels
 
@@ -144,7 +145,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** Permutation symmetry separates the action on the address labels from a small coordinate that the decoder can rotate.
 
-**Canonical sources.** [Schur receiver and resources](../science/receiver.md) · [Coherent Schur readout](CHILDS_BRIDGE.md#how-a-coherent-schur-receiver-recovers-the-full-set)
+**Canonical sources.** [Schur receiver and resources](../science/receiver.md) · [Watrous §7.1 and the decoder](WATROUS_BRIDGE.md#symmetry-and-the-decoder)
 
 ### M12 The complete one-round problem
 
@@ -156,7 +157,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** This chain connects probe feasibility to a separate realization of the receiver and separates both from physical implementation costs.
 
-**Canonical sources.** [Model and results](../science/model.md) · [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [The oracle and output](CHILDS_BRIDGE.md#the-oracle-access-and-output)
+**Canonical sources.** [Model and results](../science/model.md) · [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [Watrous §§2.1–2.3, 3.1](WATROUS_BRIDGE.md#bare-queries-and-exact-discrimination)
 
 ## Phase II — Narrative and innovation
 
@@ -170,7 +171,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The converse permits arbitrary correlations across ports and ancillary quantum systems.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M14 A symmetric probe suffices
 
@@ -182,7 +183,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** Averaging an exact feasible Gram condition leaves an exact design at the same port count. The realization prepares a single coherent probe.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M15 The exact moment program
 
@@ -194,7 +195,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The problem becomes a finite linear program with rational coefficients on physical parity layers.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M16 From weights to a phase probe
 
@@ -206,7 +207,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** Because the oracle modifies the phase and preserves the computed addresses, uncomputation puts the oracle's information in the incidence register.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M17 Optimal recovery of one mark
 
@@ -218,7 +219,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** At N=6, the empty and size-two layers cancel with weights 1/16 and 15/16. The general construction exposes why the lower bound of Wu and Duan is attained.
 
-**Canonical sources.** [Model and results](../science/model.md) · [Finite moment design](../science/moment-design.md) · [Worked circuit](CHILDS_BRIDGE.md#a-complete-four-address-circuit)
+**Canonical sources.** [Model and results](../science/model.md) · [Finite moment design](../science/moment-design.md) · [Worked circuit](WATROUS_BRIDGE.md#bare-queries-and-exact-discrimination)
 
 ### M18 Finite optimality with several marks
 
@@ -230,7 +231,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** Few-layer certificates can be checked with rational arithmetic. The exact finite criterion still applies when the fixed-r asymptotics are a poor estimate.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Phase signs and weights](CHILDS_BRIDGE.md#from-phase-signs-to-probe-weights)
+**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Watrous §7.1](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M19 The lower edge of the grid
 
@@ -242,7 +243,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** A feasible moment match reproduces the polynomial's expectation. The argument uses a sign on every available node, including those carrying zero weight.
 
-**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [From moments to the query law](CHILDS_BRIDGE.md#how-the-moment-problem-gives-a-query-law)
+**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [Parity and averaging](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M20 A quadrature node gives the bound
 
@@ -254,7 +255,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The Gaussian quadrature rule uses the same moments as the compressed multiplication matrix. Its first node locates the lower bound.
 
-**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [From moments to the query law](CHILDS_BRIDGE.md#how-the-moment-problem-gives-a-query-law)
+**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [Parity and averaging](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M21 Odd r and positive bracketing
 
@@ -266,7 +267,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** Bracketing absorbs the discreteness into bounded slack in t at fixed r. Simply moving each node to the closest layer would generally change the target moments.
 
-**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [From moments to the query law](CHILDS_BRIDGE.md#how-the-moment-problem-gives-a-query-law)
+**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [Parity and averaging](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M22 Even r and a far endpoint
 
@@ -278,7 +279,7 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The extra degree of exactness comes from adding one node. Parity-conditioned binomial moments provide an unchanged finite target for the needed degrees.
 
-**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [From moments to the query law](CHILDS_BRIDGE.md#how-the-moment-problem-gives-a-query-law)
+**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [Parity and averaging](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M23 The fixed-r query law
 
@@ -290,88 +291,88 @@ The first **12 milestones** build the access model, exact discrimination criteri
 
 **Conceptual connection.** The leading saving scales as the square root of N and depends on fixed r. The parity-grid construction controls the bounded remainder for that limit.
 
-**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [From moments to the query law](CHILDS_BRIDGE.md#how-the-moment-problem-gives-a-query-law)
+**Canonical sources.** [Fixed-weight asymptotics](../science/asymptotics.md) · [Parity and averaging](WATROUS_BRIDGE.md#parity-and-averaging)
 
 ### M24 Equivariance of a layer map
 
-**Central question.** How does each phase-encoded layer inherit permutation symmetry?
+**Central question.** How does each signed incidence layer inherit permutation symmetry?
 
-**Understanding target.** Regard the map from a marked incidence basis state to a signed query layer as an intertwiner. Explain why compatible representation sectors cannot mix under this map.
+**Understanding target.** Regard the map from a marked incidence state to an encoded layer as an intertwiner. Explain why incompatible representation sectors cannot mix.
 
 **Prerequisites.** [M11](#m11-spin-and-permutation-labels), [M14](#m14-a-symmetric-probe-suffices), [M16](#m16-from-weights-to-a-phase-probe).
 
-**Conceptual connection.** Schur's lemma turns a matrix with many subset rows and columns into scalar layer responses within shared symmetry sectors.
+**Conceptual connection.** Schur’s lemma makes each compatible sector respond through a known scalar while preserving its multiplicity information.
 
-**Canonical sources.** [Schur receiver and resources](../science/receiver.md) · [Coherent Schur readout](CHILDS_BRIDGE.md#how-a-coherent-schur-receiver-recovers-the-full-set)
+**Canonical sources.** [Schur receiver](../science/receiver.md) · [Watrous §7.1 and the decoder](WATROUS_BRIDGE.md#symmetry-and-the-decoder)
 
-### M25 Computing the sector response
+### M25 Sector responses and normalization
 
-**Central question.** How can the receiver know its response coefficients without knowing the marks?
+**Central question.** What does the receiver compute before it ever sees the mark?
 
-**Understanding target.** Evaluate a layer scalar by pairing singlets and summing over the remaining symmetric bits. Relate the resulting signed sum to a Krawtchouk expression with changed size parameters.
+**Understanding target.** Explain how singlet pairs and a signed sum on the remaining symmetric bits give a layer scalar. Use the identity output Gram matrix to show that each resulting magnetic vector has norm one.
 
-**Prerequisites.** [M09](#m09-signed-intersection-counts), [M11](#m11-spin-and-permutation-labels), [M24](#m24-equivariance-of-a-layer-map).
+**Prerequisites.** [M09](#m09-signed-intersection-counts), [M15](#m15-the-exact-moment-program), [M24](#m24-equivariance-of-a-layer-map).
 
-**Conceptual connection.** The computed coefficient depends on N, r, the query layer and the spin sector. The unknown incidence label is carried by the untouched representation coordinate.
+**Conceptual connection.** The finite moment program certifies an isometry. The known magnetic vector in each sector is the part of the isometry the decoder rotates.
 
-**Canonical sources.** [Schur receiver and resources](../science/receiver.md) · [Coherent Schur readout](CHILDS_BRIDGE.md#how-a-coherent-schur-receiver-recovers-the-full-set)
+**Canonical sources.** [Schur receiver](../science/receiver.md) · [Watrous §7.1 and the decoder](WATROUS_BRIDGE.md#symmetry-and-the-decoder)
 
-### M26 Orthogonality normalizes each sector
+### M26 Lossless readout and resources
 
-**Central question.** Why can known rotations undo the mapping coherently?
+**Central question.** How does the decoder extract every marked address?
 
-**Understanding target.** Recognize that the full layer map is an isometry exactly when the probe family has identity Gram matrix. In each spin sector this gives unit norm to its known magnetic vector.
+**Understanding target.** Transform to Schur coordinates, rotate the magnetic state conditional on spin, and invert the transform. Track how the receiver uses the preserved multiplicity register. Account separately for oracle calls, address routing, workspace and exact known rotations.
 
-**Prerequisites.** [M05](#m05-exact-discrimination), [M15](#m15-the-exact-moment-program), [M24](#m24-equivariance-of-a-layer-map), [M25](#m25-computing-the-sector-response).
+**Prerequisites.** [M04](#m04-one-layer-and-many-calls), [M16](#m16-from-weights-to-a-phase-probe), [M23](#m23-the-fixed-r-query-law), [M25](#m25-sector-responses-and-normalization).
 
-**Conceptual connection.** The finite program's global cancellation conditions provide the sector-by-sector normalization needed for an input-independent inverse.
+**Conceptual connection.** The lossless result combines probe optimality with a constructive readout. The gate precision guarantee describes compilation of the known circuit.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [Coherent Schur readout](CHILDS_BRIDGE.md#how-a-coherent-schur-receiver-recovers-the-full-set)
+**Canonical sources.** [Schur receiver and resources](../science/receiver.md) · [Verification](../verification/README.md) · [Watrous §7.1 and the decoder](WATROUS_BRIDGE.md#symmetry-and-the-decoder)
 
-### M27 Schur rotation and inverse readout
+### M27 Tracing out a queried port
 
-**Central question.** What does the decoder do after the oracle layer?
+**Central question.** What information does the flag provide, and what remains hidden?
 
-**Understanding target.** Schur-transform the incidence register, rotate the layer vector conditional on spin to the known target magnetic label, and invert the transform. Explain how computational-basis measurement then gives the whole set.
+**Understanding target.** Expand the erased register in the address basis and trace it out. Identify which sign is global inside each summand. Explain why exact readout must separate the supports of candidate mixed states.
 
-**Prerequisites.** [M11](#m11-spin-and-permutation-labels), [M24](#m24-equivariance-of-a-layer-map), [M25](#m25-computing-the-sector-response), [M26](#m26-orthogonality-normalizes-each-sector).
+**Prerequisites.** [M04](#m04-one-layer-and-many-calls), [M05](#m05-exact-discrimination), [M13](#m13-reducing-a-general-probe).
 
-**Conceptual connection.** The receiver preserves the representation labels coherently. A spin measurement alone would record only the spin outcome.
+**Conceptual connection.** Every lost-address branch contributes positively to a candidate state. Orthogonality of supports requires all cross-mark branch overlaps to vanish.
 
-**Canonical sources.** [Schur receiver and resources](../science/receiver.md) · [Coherent Schur readout](CHILDS_BRIDGE.md#how-a-coherent-schur-receiver-recovers-the-full-set)
+**Canonical sources.** [Erasure model](../science/flagged-erasure.md#model) · [Watrous §§2.1, 3.1](WATROUS_BRIDGE.md#from-a-lost-port-to-branch-supports)
 
-### M28 Circuit width and gate precision
+### M28 Matrix-valued parity constraints
 
-**Central question.** Which other quantities matter when implementing the one-round procedure?
+**Central question.** How does the scalar parity moment method change after loss?
 
-**Understanding target.** Count separate address and incidence registers, reversible logic, Schur transforms, controlled rotations, and output storage. Connect the ideal exact circuit to an approximation error target for a finite gate set.
+**Understanding target.** Group survivor tuples by parity and retain the hidden address indices in a Gram matrix. Derive the common matrix ratios for five addresses and the bound on each lost-port rank. Follow the forced repeated-tuple weights to the no-quantum-memory obstruction.
 
-**Prerequisites.** [M04](#m04-one-layer-and-many-calls), [M16](#m16-from-weights-to-a-phase-probe), [M23](#m23-the-fixed-r-query-law), [M27](#m27-schur-rotation-and-inverse-readout).
+**Prerequisites.** [M07](#m07-differences-between-candidates), [M15](#m15-the-exact-moment-program), [M27](#m27-tracing-out-a-queried-port).
 
-**Conceptual connection.** A smaller oracle layer does not imply an equally small total circuit. The known gates act coherently on both sides of that layer.
+**Conceptual connection.** A protected tag of dimension d supplies two copies of its space for each distinct pair of survivor addresses. The Gram matrix carries branch coherences in addition to its diagonal probabilities.
 
-**Canonical sources.** [Model and results](../science/model.md) · [Schur receiver and resources](../science/receiver.md) · [Coherent Schur readout](CHILDS_BRIDGE.md#how-a-coherent-schur-receiver-recovers-the-full-set)
+**Canonical sources.** [Gram identities and converse](../science/flagged-erasure.md#the-gram-identities-at-five-addresses) · [Watrous §§2.1, 3.1](WATROUS_BRIDGE.md#from-a-lost-port-to-branch-supports)
 
-### M29 Checking a finite instance
+### M29 Constructing the protected qutrit probe
 
-**Central question.** Which parts of the argument can a finite check confirm?
+**Central question.** How does a three-level tag separate the hidden-address rows?
 
-**Understanding target.** Trace an instance from the first feasible rational weights to pairwise zero overlaps and the receiver's sector responses. Match each calculation to the theorem ingredient it checks.
+**Understanding target.** Trace the symmetric repeated-address rows, the antisymmetric component on distinct triples, and the cube-root phase choices. Verify why equal surviving addresses require signed cancellation and why the tag gives exact mark supports.
 
-**Prerequisites.** [M17](#m17-optimal-recovery-of-one-mark), [M18](#m18-finite-optimality-with-several-marks), [M25](#m25-computing-the-sector-response), [M26](#m26-orthogonality-normalizes-each-sector), [M28](#m28-circuit-width-and-gate-precision).
+**Prerequisites.** [M26](#m26-lossless-readout-and-resources), [M27](#m27-tracing-out-a-queried-port), [M28](#m28-matrix-valued-parity-constraints).
 
-**Conceptual connection.** Exact rational feasibility checks and small matrix-spectrum checks serve different roles. The converse and fixed-r asymptotics use the independent written proofs.
+**Conceptual connection.** The table of known tag phases is a finite constructive certificate. Its orthogonal supports give a fixed receiver for each loss flag.
 
-**Canonical sources.** [Finite moment design](../science/moment-design.md) · [Schur receiver and resources](../science/receiver.md) · [Verification](../verification/README.md)
+**Canonical sources.** [Qutrit construction](../science/flagged-erasure.md#a-qutrit-construction) · [Exact checks](../verification/README.md#flagged-erasure) · [Watrous §§2.3, 3.1](WATROUS_BRIDGE.md#the-qutrit-and-coherent-recovery)
 
-### M30 The scientific result in its access model
+### M30 What recovery requires
 
-**Central question.** What has the project established about simultaneous oracle access?
+**Central question.** When do label recovery and coherent recovery have different memory costs?
 
-**Understanding target.** Reconstruct the argument from the access promise to the exact finite optimum, the fixed-r law and the explicit receiver. Track when the complement obstruction or a different scheduler changes the task, and separate oracle resources from known gates.
+**Understanding target.** Reconstruct the lossless result from the oracle model to the Schur readout, then state the exact five-address flagged-loss guarantees. Explain why coherent decoding requires the erased port to be independent of the logical input and why this forces three protected levels. Identify the open qubit case for classical identification.
 
-**Prerequisites.** [M12](#m12-the-complete-one-round-problem), [M17](#m17-optimal-recovery-of-one-mark), [M18](#m18-finite-optimality-with-several-marks), [M23](#m23-the-fixed-r-query-law), [M27](#m27-schur-rotation-and-inverse-readout), [M28](#m28-circuit-width-and-gate-precision), [M29](#m29-checking-a-finite-instance).
+**Prerequisites.** [M12](#m12-the-complete-one-round-problem), [M23](#m23-the-fixed-r-query-law), [M26](#m26-lossless-readout-and-resources), [M28](#m28-matrix-valued-parity-constraints), [M29](#m29-constructing-the-protected-qutrit-probe).
 
-**Conceptual connection.** The same Gram conditions support both the converse and the circuit. The single-mark bound and multi-mark moment laws become instances of one constructive mechanism.
+**Conceptual connection.** The lossless layer and the lossy receiver use the same ordinary phase oracle. Their exactness conditions are applied to different accessible subsystems. Delayed continuous-phase retrieval uses the same partial trace with a channel-valued success criterion.
 
-**Canonical sources.** [Model and results](../science/model.md) · [Finite moment design](../science/moment-design.md) · [Fixed-weight asymptotics](../science/asymptotics.md) · [Schur receiver and resources](../science/receiver.md)
+**Canonical sources.** [Lossless model](../science/model.md) · [Coherent recovery](../science/flagged-erasure.md#coherent-recovery-costs-exactly-one-qutrit) · [Watrous §§2.2, 3.1](WATROUS_BRIDGE.md#the-qutrit-and-coherent-recovery)

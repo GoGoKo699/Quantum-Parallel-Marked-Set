@@ -13,13 +13,17 @@ Scientific routes
   positive bracketing and finite endpoint for the even-moment construction.
 - science/receiver.md: signed incidence multipliers, explicit Schur-transform
   decoder, address routing and known-gate resource bounds.
+- science/flagged-erasure.md: exact model after one flagged port loss, Gram
+  constraints, qutrit construction and coherent-memory optimum. For classical
+  identification, a protected qubit remains open at five addresses.
 - references/RELATED_WORK.md and references/references.bib: provenance.
 - verification/README.md: commands and scope of executable checks.
 
 Learning routes
 
-- learning/CHILDS_BRIDGE.md: Andrew M. Childs's 17 April 2025 Lecture Notes
-  on Quantum Algorithms, selected sections and worked translations.
+- learning/WATROUS_BRIDGE.md: primary anchor, John Watrous's The Theory of
+  Quantum Information (Cambridge University Press, 2018), §§2.1–2.3, 3.1, 7.1.
+- learning/CHILDS_BRIDGE.md: supplementary oracle and algorithm background.
 - learning/MILESTONES.md: 30 shared milestones, with 12 background and
   18 project-specific milestones.
 
@@ -27,4 +31,7 @@ Read the model before comparing with a bit oracle, controlled phase access,
 multi-round enumeration or a circuit-depth benchmark. The finite program
 covers every supplied admissible cardinality. The Laguerre expansion takes
 the large-address limit at a fixed number of marks. For balanced weight,
-complementary sets implement the same phase channel.
+complementary sets implement the same phase channel. The flagged-erasure
+result uses the same bare oracle, immediate loss and an explicitly charged
+protected quantum register. The sister companion on continuous-phase retrieval
+is Quantum-Phase-Gate-Erasure/science/flagged-search.md.

@@ -1,8 +1,8 @@
 # From Childs's quantum algorithms notes to one-round marked-set recovery
 
-**Educational anchor.** Andrew M. Childs, *Lecture Notes on Quantum Algorithms*, version dated 17 April 2025. [Author's page](https://www.cs.umd.edu/~amchilds/qa/) · [Full notes](https://www.cs.umd.edu/~amchilds/qa/qa.pdf)
+**Supplementary reading.** Andrew M. Childs, *Lecture Notes on Quantum Algorithms*, version dated 17 April 2025. [Author's page](https://www.cs.umd.edu/~amchilds/qa/) · [Full notes](https://www.cs.umd.edu/~amchilds/qa/qa.pdf)
 
-Read the query model first, then use the sections below as each part of the project calls for them. The [milestone map](MILESTONES.md) follows that order through the project.
+Read the query model first, then use the sections below as each part of the project calls for them. The [Watrous bridge](WATROUS_BRIDGE.md) and [milestone map](MILESTONES.md) provide the main learning route.
 
 | Read | Carry into the project |
 |---|---|
