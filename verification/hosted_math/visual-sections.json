@@ -1,0 +1,18 @@
+{
+  "README.md": [
+    "Run the one-round search",
+    "One flagged query-port erasure"
+  ],
+  "science/moment-design.md": [
+    "The finite moment program"
+  ],
+  "science/receiver.md": [
+    "Decode the marked set"
+  ],
+  "science/flagged-erasure.md": [
+    "A qutrit construction"
+  ],
+  "learning/WATROUS_BRIDGE.md": [
+    "The qutrit and coherent recovery"
+  ]
+}
