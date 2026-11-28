@@ -21,6 +21,14 @@ where $`a_r`$ is twice the smallest zero of the generalized Laguerre polynomial 
 
 Two ingredients make the result operational. A coherent superposition of subsets whose sizes have the query count's parity makes the possible post-query states orthogonal. The Schur transform then extracts the marked set with a polynomial-size known circuit. For one mark, the construction attains the lower bound [Wu and Duan](references/RELATED_WORK.md#exact-parallel-search) left open. Their asymptotic product-input lower bound also applies to complete recovery for every supplied nontrivial marked-set size.
 
+## Run the one-round search
+
+1. **Compute the probe from the address count and the supplied number of marks.** Use the [rational moment program](science/moment-design.md) to find the call budget and weights of the allowed subset sizes. Initialize the known superposition of magnetic labels in the fully symmetric spin sector. Apply the inverse Schur transform to prepare the corresponding superposition of uniform subset states on the incidence qubits.
+2. **Route the subset through the phase ports.** Reversibly scan the incidence bits and write the selected addresses in increasing order into the query registers. Initialize unused registers to the same valid address. There are an even number of these padding registers in each subset component, so their phases cancel. Call the supplied marked-address phase oracle once on each register in the same layer, then reverse the scan to clear the address and work registers.
+3. **Read out the full marked set.** Apply the Schur transform to the incidence register. Conditioned on the spin label, use the [known magnetic rotation](science/receiver.md#decode-the-marked-set) to return the magnetic label to the one for the supplied mark count while preserving the multiplicity register coherently. Apply the inverse Schur transform, measure the incidence bits, and return the addresses whose bits are one.
+
+Count every phase port, including padding. Budget the classical moment calculation, incidence and address storage, known gates and their precision using the [moment program](science/moment-design.md) and [receiver resource account](science/receiver.md#circuit-resources-and-precision). Exact readout uses ideal known rotations. A device implementation must also supply the parallel predicate ports and account for their costs.
+
 ## One flagged query-port erasure
 
 With five addresses and one mark, three calls are necessary and sufficient if
@@ -30,6 +38,8 @@ recovery of the queried mark states. Exact identification requires quantum
 memory. Whether a protected qubit suffices for identification remains open.
 The [flagged-erasure proof](science/flagged-erasure.md) gives the probe, receiver
 and finite obstructions.
+
+For this five-address case, prepare the specified joint state on three query registers and a protected qutrit. Call all three phase ports once. Use the erasure flag to select the fixed decoder on the two surviving query registers and the qutrit, then measure the mark label. All three calls count, and the receiver needs only the erasure position from the flag.
 
 [Quantum Phase Gate Erasure](https://github.com/GoGoKo699/Quantum-Phase-Gate-Erasure/blob/main/science/flagged-search.md)
 uses the same hidden-branch expansion to study exact delayed retrieval of a
